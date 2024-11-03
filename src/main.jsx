@@ -7,6 +7,8 @@ import HomePage from './pages/home.jsx';
 import RegisterPage from './pages/register.jsx';
 import LoginPage from './pages/login.jsx';
 import UserPage from './pages/user.jsx';
+import { AuthWrapper } from './components/context/auth.context.jsx';
+import { ProductWrapper } from './components/context/product.context.jsx';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ProductWrapper>
+      <AuthWrapper>
+        <RouterProvider router={router} />
+      </AuthWrapper>
+    </ProductWrapper>
   </StrictMode>,
 );

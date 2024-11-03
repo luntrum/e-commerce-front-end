@@ -23,8 +23,12 @@ const loginUserApi = (username, password) => {
 const getUserApi = (username) => {
   const URL_API = 'v1/api/user';
   const data = { username };
-  console.log(data);
   return axios.post(URL_API, data);
 };
 
-export { createUserApi, loginUserApi, getUserApi };
+const getAllProductApi = () => {
+  const URL_API = 'v1/api/getallProduct';
+  return axios.get(URL_API);
+};
+
+export { createUserApi, loginUserApi, getUserApi, getAllProductApi };
