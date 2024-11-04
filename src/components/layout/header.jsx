@@ -87,9 +87,12 @@ const Header = () => {
     <div className="flex justify-between align-middle mt-2 h-12">
       <div className="m-auto flex align-middle justify-between  ">
         <img
-          src="public\favicon\android-chrome-192x192.png"
-          className="w-1/2 h-12 m-auto pr-2"
-        ></img>
+          src="/favicon/android-chrome-192x192.png"
+          alt="favicon"
+          type="image/png"
+          sizes="16x16"
+          className="w-8 h-8 mr-2"
+        />
         <span className="m-auto">KelvinMall</span>
       </div>
       <Input.Search
