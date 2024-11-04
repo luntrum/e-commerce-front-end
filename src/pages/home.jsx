@@ -2,6 +2,7 @@ import { Button, Card, Carousel, List, Typography } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { ProductContext } from '../components/context/product.context';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   const { products } = useContext(ProductContext);
@@ -18,13 +19,18 @@ function HomePage() {
 
           <div className="m-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center ">
             {products.map((product) => (
-              <div className=" ml-0 my-2 grid items-center justify-center">
+              <div
+                key={product._id}
+                className=" ml-0 my-2 grid items-center justify-center"
+              >
                 <Card
-                  key={product.id}
                   title={
-                    <p className="m-auto text-center text-wrap">
+                    <Link
+                      className=" flex justify-center m-auto items-center text-nowrap hover:underline"
+                      to={`/products/${product.product_id}`}
+                    >
                       {product.name}
-                    </p>
+                    </Link>
                   }
                   className=" m-auto  justify-between h-full w-60 md:w-72  "
                 >

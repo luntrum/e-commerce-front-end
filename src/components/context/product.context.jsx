@@ -4,11 +4,12 @@ import { getAllProductApi } from '../../util/api';
 export const ProductContext = createContext({});
 export const ProductWrapper = (props) => {
   const [products, setProducts] = useState([]);
-
+  const [cart, setCart] = useState([]);
+  //get data from backend
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await getAllProductApi(); // Thay thế bằng endpoint thực tế
+        const data = await getAllProductApi();
 
         setProducts(data);
         localStorage.setItem('products', JSON.stringify(data));
@@ -19,7 +20,7 @@ export const ProductWrapper = (props) => {
 
     fetchProducts();
   }, []);
-
+  ///check if there is data in localStorages
   useEffect(() => {
     const productsdata = localStorage.getItem('products');
 
@@ -34,6 +35,7 @@ export const ProductWrapper = (props) => {
       }
     }
   }, []);
+  //save data to localStorages
   useEffect(() => {
     if (products) {
       localStorage.setItem('products', JSON.stringify(products));
@@ -41,7 +43,7 @@ export const ProductWrapper = (props) => {
   }, [products]);
 
   return (
-    <ProductContext.Provider value={{ products, setProducts }}>
+    <ProductContext.Provider value={{ products, setProducts, cart, setCart }}>
       {props.children}
     </ProductContext.Provider>
   );

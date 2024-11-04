@@ -86,14 +86,20 @@ const Header = () => {
   return (
     <div className="flex justify-between align-middle mt-2 h-12">
       <div className="m-auto flex align-middle justify-between  ">
-        <img
-          src="/favicon/android-chrome-192x192.png"
-          alt="favicon"
-          type="image/png"
-          sizes="16x16"
-          className="w-8 h-8 mr-2"
-        />
-        <span className="m-auto">KelvinMall</span>
+        <Link
+          to={'/'}
+          className="flex
+        "
+        >
+          <img
+            src="/favicon/android-chrome-192x192.png"
+            alt="favicon"
+            type="image/png"
+            sizes="16x16"
+            className="w-8 h-8 mr-2"
+          />
+          <span className="m-auto">KelvinMall</span>
+        </Link>
       </div>
       <Input.Search
         placeholder="Type what you need to find..."
