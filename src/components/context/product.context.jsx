@@ -1,10 +1,11 @@
-import { createContext, useEffect, useState } from 'react';
-import { getAllProductApi } from '../../util/api';
+import { createContext , useEffect, useState } from 'react';
+import { getAllProductApi, selectProductApi } from '../../util/api';
+
 
 export const ProductContext = createContext({});
 export const ProductWrapper = (props) => {
+
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
   //get data from backend
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,7 +24,7 @@ export const ProductWrapper = (props) => {
   ///check if there is data in localStorages
   useEffect(() => {
     const productsdata = localStorage.getItem('products');
-
+  
     if (productsdata) {
       try {
         const paredData = JSON.parse(productsdata);
@@ -34,6 +35,7 @@ export const ProductWrapper = (props) => {
         console.error('Error parsing Products from localStorages', error);
       }
     }
+   
   }, []);
   //save data to localStorages
   useEffect(() => {
@@ -42,8 +44,11 @@ export const ProductWrapper = (props) => {
     }
   }, [products]);
 
+  
   return (
-    <ProductContext.Provider value={{ products, setProducts, cart, setCart }}>
+    <ProductContext.Provider
+      value={{ products, setProducts }}
+    >
       {props.children}
     </ProductContext.Provider>
   );

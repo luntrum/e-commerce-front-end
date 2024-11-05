@@ -11,20 +11,16 @@ const LoginPage = () => {
   const onFinish = async (values) => {
     const { username, password } = values;
     const res = await loginUserApi(username, password);
+
     if (res && res.EC === 0) {
       notification.success({
         message: 'Login Success',
         description: 'success',
       });
-      console.log(res);
+      // console.log(res);
       setAuth({
         isAuthenticated: true,
-        user: {
-          name: res.user.name,
-          username: res.user.username,
-          email: '',
-          role: '',
-        },
+        user: res.user,
       });
       // console.log(auth);
       navigate('/');

@@ -10,6 +10,7 @@ import UserPage from './pages/user.jsx';
 import { AuthWrapper } from './components/context/auth.context.jsx';
 import { ProductWrapper } from './components/context/product.context.jsx';
 import ProductDetailPage from './pages/product.jsx';
+import CartPage from './pages/cart.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/products/:id',
         element: <ProductDetailPage />,
+      },
+      {
+        path: '/shopping-cart',
+        element: <CartPage />,
       },
     ],
   },

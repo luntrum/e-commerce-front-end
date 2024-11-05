@@ -5,19 +5,20 @@ import { AuthContext } from '../components/context/auth.context';
 
 const UserPage = () => {
   const { auth, setAuth } = useContext(AuthContext);
-  useEffect(() => {
-    const fetchUser = async () => {
-      const username = auth.user.username;
-      const res = await getUserApi(username);
-      if (res?.data && res.status === 200) {
-        setAuth({
-          isAuthenticated: true,
-          user: res.data,
-        });
-      }
-    };
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const username = auth.user.username;
+  //     const res = await getUserApi(username);
+  //     // console.log(res);
+  //     if (res?.data && res.status === 200) {
+  //       setAuth({
+  //         isAuthenticated: true,
+  //         user: res.data,
+  //       });
+  //     }
+  //   };
+  //   fetchUser();
+  // }, []);
 
   return (
     <div className="flex justify-center align-middle p-5">
@@ -39,6 +40,7 @@ const UserPage = () => {
               {auth.user.username}
             </span>
           </Descriptions.Item>
+          <p>id: {auth.user._id}</p>
           <Descriptions.Item
             label={
               <span className="text-sm sm:text-sm md:text-xl lg:text-3xl">

@@ -3,9 +3,11 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { ProductContext } from '../components/context/product.context';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../components/context/auth.context';
 
 function HomePage() {
   const { products } = useContext(ProductContext);
+  const { handleAddtoCart } = useContext(AuthContext);
   const categorizedProducts = products.reduce((acc, product) => {
     (acc[product.category] = acc[product.category] || []).push(product);
     return acc;
@@ -41,7 +43,7 @@ function HomePage() {
                   <Button
                     type="primary"
                     icon={<ShoppingCartOutlined />}
-                    onClick={() => console.log('Add to cart', product)}
+                    onClick={() => handleAddtoCart(product.product_id)}
                     className="w-full"
                   >
                     <p className="text-sm hidden sm:flex">Add to cart</p>

@@ -3,6 +3,7 @@ import {
   LoginOutlined,
   LogoutOutlined,
   SettingOutlined,
+  ShoppingCartOutlined,
   UserAddOutlined,
   UserOutlined,
 } from '@ant-design/icons';
@@ -35,6 +36,11 @@ const Header = () => {
       label: <Link to="/">Home</Link>,
       key: 'home',
       icon: <HomeOutlined />,
+    },
+    {
+      label: <Link to="/shopping-cart">Your Cart</Link>,
+      key: 'shoppingCart',
+      icon: <ShoppingCartOutlined />,
     },
     {
       label: 'Account',
@@ -111,7 +117,7 @@ const Header = () => {
         onClick={onClick}
         selectedKeys={[current]}
         mode="horizontal"
-        className="flex mx-auto justify-end sm:w-1/6"
+        className="flex mx-auto justify-end sm:w-1/6 md:w-1/4 lg:w-1/4"
         items={items}
       />
     </div>

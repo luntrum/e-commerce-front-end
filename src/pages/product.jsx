@@ -3,12 +3,17 @@ import { useParams } from 'react-router-dom';
 import { ProductContext } from '../components/context/product.context';
 import { Button, Card } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
+import { selectProductApi } from '../util/api';
+import { AuthContext } from '../components/context/auth.context';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
   const { products } = useContext(ProductContext);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { auth, handleAddToCart } = useContext(AuthContext);
+  const userId = auth?.user?._id;
+
   useEffect(() => {
     const foundProduct = products.find(
       (product) => product.product_id === parseInt(id),
@@ -56,7 +61,7 @@ const ProductDetailPage = () => {
         <Button
           type="primary"
           icon={<ShoppingCartOutlined />}
-          onClick={() => console.log('Add to cart', product)}
+          onClick={() => handleAddToCart(product.product_id)}
           className="w-full"
         >
           <p className="text-sm hidden sm:flex">Add to cart</p>

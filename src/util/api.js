@@ -31,4 +31,19 @@ const getAllProductApi = () => {
   return axios.get(URL_API);
 };
 
-export { createUserApi, loginUserApi, getUserApi, getAllProductApi };
+const selectProductApi = (userId, productId) => {
+  const URL_API = 'v1/api/selectProduct';
+  const data = {
+    userId,
+    productId,
+  };
+  return axios.post(URL_API, data);
+};
+
+export {
+  createUserApi,
+  loginUserApi,
+  getUserApi,
+  getAllProductApi,
+  selectProductApi,
+};
