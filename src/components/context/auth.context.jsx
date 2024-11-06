@@ -1,11 +1,13 @@
-import { App } from 'antd';
-import { createContext, useEffect, useState } from 'react';
+import { App, notification } from 'antd';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { getUserApi, selectProductApi } from '../../util/api';
 import { data } from 'autoprefixer';
+import { ProductContext } from './product.context';
 
 export const AuthContext = createContext({});
 
 export const AuthWrapper = (props) => {
+  const { products } = useContext(ProductContext);
   const [auth, setAuth] = useState({
     isAuthenticated: false,
     user: {
@@ -43,12 +45,14 @@ export const AuthWrapper = (props) => {
     }
   }, [auth]);
   const handleAddtoCart = async (productId) => {
+    const product = products.find(
+      (product) => product.product_id === productId,
+    );
     try {
       const selectedProductsData = await selectProductApi(
         auth.user._id,
         productId,
       );
-
       if (selectedProductsData) {
         const fetchUser = async () => {
           const username = auth.user.username;
@@ -62,9 +66,17 @@ export const AuthWrapper = (props) => {
           }
         };
         fetchUser();
+        notification.success({
+          message: `Added item to cart`,
+          description: `${product.name} added to cart`,
+        });
       }
     } catch (error) {
       console.log(error);
+      notification.error({
+        message: 'Error',
+        description: 'Please login for continue shopping',
+      });
     }
   };
   return (

@@ -40,7 +40,6 @@ const UserPage = () => {
               {auth.user.username}
             </span>
           </Descriptions.Item>
-          <p>id: {auth.user._id}</p>
           <Descriptions.Item
             label={
               <span className="text-sm sm:text-sm md:text-xl lg:text-3xl">
