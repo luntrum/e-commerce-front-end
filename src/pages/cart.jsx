@@ -39,6 +39,11 @@ const CartPage = () => {
   // Cột cho bảng
   const columns = [
     {
+      title: 'Stt',
+      key: 'index',
+      render: (_, __, index) => index + 1, // Tăng dần từ 1
+    },
+    {
       title: 'Product Name',
       dataIndex: 'name',
       key: 'name',
@@ -111,6 +116,26 @@ const CartPage = () => {
   const handlePurchase = () => {
     navigate('/');
   };
+
+  /// set pagination with page size
+  // const [pagination, setPagination] = useState(8);
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (window.innerWidth <= 768) {
+  //       setPagination(4);
+  //     } else if (window.innerWidth <= 1024) {
+  //       setPagination(6);
+  //     } else {
+  //       setPagination(8);
+  //     }
+  //   };
+  //   handleResize();
+  //   window.addEventListener('resize', handleResize);
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
+
   return (
     <div className="w-full m-auto mt-5">
       <section className="m-auto w-3/4 bottom-20 top-12">
@@ -120,6 +145,8 @@ const CartPage = () => {
           dataSource={cartItems}
           rowKey="product_id"
           pagination={{ pageSize: 8 }}
+          scroll={{ y: 400 }}
+          style={{ minHeight: '400px' }}
         />
       </section>
       <footer className=" fixed w-full  bottom-0 bg-white h-20 ">
