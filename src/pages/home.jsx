@@ -16,7 +16,7 @@ function HomePage() {
   return (
     <div className="m-5 w-full ">
       {Object.entries(categorizedProducts).map(([category, products]) => (
-        <div key={category} className="w-full mb-8 ">
+        <div key={category} id={`${category}`} className="w-full mb-8 ">
           <Typography.Title level={3}>{category}</Typography.Title>
 
           <div className="m-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center ">

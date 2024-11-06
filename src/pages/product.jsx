@@ -11,7 +11,7 @@ const ProductDetailPage = () => {
   const { products } = useContext(ProductContext);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { auth, handleAddToCart } = useContext(AuthContext);
+  const { auth, handleAddtoCart } = useContext(AuthContext);
   const userId = auth?.user?._id;
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const ProductDetailPage = () => {
         <Button
           type="primary"
           icon={<ShoppingCartOutlined />}
-          onClick={() => handleAddToCart(product.product_id)}
+          onClick={() => handleAddtoCart(product.product_id)}
           className="w-full"
         >
           <p className="text-sm hidden sm:flex">Add to cart</p>

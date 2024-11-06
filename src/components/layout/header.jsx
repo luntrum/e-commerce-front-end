@@ -7,14 +7,17 @@ import {
   UserAddOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Drawer, Input, Menu } from 'antd';
+import { Menu } from 'antd';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
+import SearchBar from './searchBar';
+import { ProductContext } from '../context/product.context';
 
 const Header = () => {
   const navigate = useNavigate();
   const { auth, setAuth } = useContext(AuthContext);
+  const { products } = useContext(ProductContext);
 
   const location = useLocation();
 
@@ -81,12 +84,12 @@ const Header = () => {
       ],
     },
   ];
-  const [headerItems, setHeaderItems] = useState([]);
-  useEffect(() => {
-    setHeaderItems(items);
-  }, [auth]);
-  const onSearch = () => {
-    console.log('search');
+
+  const handleSearch = (value) => {
+    const searchReSults = products.filter((product) => {
+      return product.name.toLowerCase().includes(value.toLowerCase());
+    });
+    return searchReSults;
   };
 
   return (
@@ -107,11 +110,9 @@ const Header = () => {
           <span className="m-auto">KelvinMall</span>
         </Link>
       </div>
-      <Input.Search
-        placeholder="Type what you need to find..."
-        onSearch={onSearch}
-        className="w-1/3 m-auto"
-      />
+      <div className="w-1/2 m-auto align-middle">
+        <SearchBar onSearch={handleSearch} />
+      </div>
 
       <Menu
         onClick={onClick}
