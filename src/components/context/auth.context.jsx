@@ -1,8 +1,8 @@
-import { App, notification } from 'antd';
-import { createContext, useContext, useEffect, useState } from 'react';
-import { getUserApi, selectProductApi } from '../../util/api';
-import { data } from 'autoprefixer';
-import { ProductContext } from './product.context';
+import { App, notification } from "antd";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getUserApi, selectProductApi, updateUserApi } from "../../util/api";
+import { data } from "autoprefixer";
+import { ProductContext } from "./product.context";
 
 export const AuthContext = createContext({});
 
@@ -11,14 +11,14 @@ export const AuthWrapper = (props) => {
   const [auth, setAuth] = useState({
     isAuthenticated: false,
     user: {
-      userId: '',
-      username: '',
-      email: '',
-      name: '',
-      role: '',
+      userId: "",
+      username: "",
+      email: "",
+      name: "",
+      role: "",
       selectedProducts: [
         {
-          productId: '',
+          productId: "",
           quantity: 0,
         },
       ],
@@ -26,7 +26,7 @@ export const AuthWrapper = (props) => {
   });
 
   useEffect(() => {
-    const auth = localStorage.getItem('auth');
+    const auth = localStorage.getItem("auth");
     if (auth) {
       try {
         const parsedata = JSON.parse(auth);
@@ -35,13 +35,13 @@ export const AuthWrapper = (props) => {
         }
         // console.log(parsedata);
       } catch (error) {
-        console.log('error parsing auth', error);
+        console.log("error parsing auth", error);
       }
     }
   }, []);
   useEffect(() => {
     if (auth?.user && auth?.isAuthenticated === true) {
-      localStorage.setItem('auth', JSON.stringify(auth));
+      localStorage.setItem("auth", JSON.stringify(auth));
     }
   }, [auth]);
   const handleAddtoCart = async (productId) => {
@@ -74,13 +74,31 @@ export const AuthWrapper = (props) => {
     } catch (error) {
       console.log(error);
       notification.error({
-        message: 'Error',
-        description: 'Please login for continue shopping',
+        message: "Error",
+        description: "Please login for continue shopping",
       });
     }
   };
+
+  const handleUpdateCart = async (updateData) => {
+    console.log(updateData);
+    try {
+      const res = await updateUserApi(auth.user._id, updateData);
+      if (res) {
+        console.log("update Successfully", res);
+        return res;
+      } else {
+        console.log("update Failed");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ auth, setAuth, handleAddtoCart }}>
+    <AuthContext.Provider
+      value={{ auth, setAuth, handleAddtoCart, handleUpdateCart }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

@@ -6,13 +6,13 @@ import {
   ShoppingCartOutlined,
   UserAddOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import { Menu } from 'antd';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/auth.context';
-import SearchBar from './searchBar';
-import { ProductContext } from '../context/product.context';
+} from "@ant-design/icons";
+import { Menu } from "antd";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
+import SearchBar from "./searchBar";
+import { ProductContext } from "../context/product.context";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Header = () => {
   const location = useLocation();
 
   const getPathKey = (pathname) =>
-    pathname === '/' ? 'home' : pathname.split('/')[1];
+    pathname === "/" ? "home" : pathname.split("/")[1];
 
   const [current, setCurrent] = useState(getPathKey(location.pathname));
 
@@ -37,47 +37,47 @@ const Header = () => {
   const items = [
     {
       label: <Link to="/">Home</Link>,
-      key: 'home',
+      key: "home",
       icon: <HomeOutlined />,
     },
     {
       label: <Link to="/shopping-cart">Your Cart</Link>,
-      key: 'shoppingCart',
+      key: "shoppingCart",
       icon: <ShoppingCartOutlined />,
     },
     {
-      label: 'Account',
-      key: 'SubMenu',
+      label: "Account",
+      key: "SubMenu",
       icon: <SettingOutlined />,
       children: [
         ...(auth?.isAuthenticated
           ? [
               {
                 label: <Link to="/user">Your infomation</Link>,
-                key: 'user',
+                key: "user",
                 icon: <UserOutlined />,
               },
               {
-                label: 'Logout',
-                key: 'logout',
+                label: "Logout",
+                key: "logout",
                 icon: <LogoutOutlined />,
                 onClick: () => {
-                  localStorage.removeItem('auth');
+                  localStorage.removeItem("auth");
                   setAuth({ isAuthenticated: false, user: {} });
-                  setCurrent('home');
-                  navigate('/');
+                  setCurrent("home");
+                  navigate("/");
                 },
               },
             ]
           : [
               {
                 label: <Link to="/login"> Sign In </Link>,
-                key: 'login',
+                key: "login",
                 icon: <LoginOutlined />,
               },
               {
                 label: <Link to="/register"> Sign Up </Link>,
-                key: 'register',
+                key: "register",
                 icon: <UserAddOutlined />,
               },
             ]),
@@ -93,24 +93,20 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between align-middle mt-2 h-12">
-      <div className="m-auto flex align-middle justify-between  ">
-        <Link
-          to={'/'}
-          className="flex
-        "
-        >
+    <div className="mt-2 flex h-12 justify-between align-middle">
+      <div className="m-auto flex justify-between align-middle">
+        <Link to={"/"} className="flex">
           <img
             src="/favicon/android-chrome-192x192.png"
             alt="favicon"
             type="image/png"
             sizes="16x16"
-            className="w-8 h-8 mr-2"
+            className="mr-2 h-8 w-8"
           />
           <span className="m-auto">KelvinMall</span>
         </Link>
       </div>
-      <div className="w-1/2 m-auto align-middle">
+      <div className="m-auto hidden w-1/2 align-middle sm:flex">
         <SearchBar onSearch={handleSearch} />
       </div>
 
@@ -118,7 +114,7 @@ const Header = () => {
         onClick={onClick}
         selectedKeys={[current]}
         mode="horizontal"
-        className="flex mx-auto justify-end sm:w-1/6 md:w-1/4 lg:w-1/4"
+        className="mx-auto flex w-2/3 justify-end sm:w-1/6 md:w-1/4 lg:w-1/4"
         items={items}
       />
     </div>
