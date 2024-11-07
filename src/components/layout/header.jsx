@@ -114,7 +114,7 @@ const Header = () => {
         onClick={onClick}
         selectedKeys={[current]}
         mode="horizontal"
-        className="mx-auto flex w-2/3 justify-end sm:w-1/6 md:w-1/4 lg:w-1/4"
+        className="mx-auto flex w-3/5 justify-end sm:w-1/6 md:w-1/4 lg:w-1/4"
         items={items}
       />
     </div>

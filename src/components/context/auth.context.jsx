@@ -25,11 +25,25 @@ export const AuthWrapper = (props) => {
     },
   });
 
+  const fetchUserData = async (username) => {
+    try {
+      const res = await getUserApi(username);
+      if (res?.data && res?.status === 200) {
+        setAuth({
+          isAuthenticated: true,
+          user: res.data,
+        });
+      }
+    } catch (error) {
+      console.log(error, "error fetching data");
+    }
+  };
+  //get item from localStorage
   useEffect(() => {
-    const auth = localStorage.getItem("auth");
-    if (auth) {
+    const authLocal = localStorage.getItem("auth");
+    if (authLocal && !auth?.isAuthenticated) {
       try {
-        const parsedata = JSON.parse(auth);
+        const parsedata = JSON.parse(authLocal);
         if (parsedata) {
           setAuth(parsedata);
         }
@@ -81,11 +95,10 @@ export const AuthWrapper = (props) => {
   };
 
   const handleUpdateCart = async (updateData) => {
-    console.log(updateData);
     try {
       const res = await updateUserApi(auth.user._id, updateData);
       if (res) {
-        console.log("update Successfully", res);
+        fetchUserData(auth.user.username);
         return res;
       } else {
         console.log("update Failed");
