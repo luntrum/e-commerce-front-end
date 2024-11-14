@@ -3,7 +3,7 @@ import Header from "./components/layout/header";
 
 function App() {
   return (
-    <div>
+    <div className="bg-white">
       <header className="fixed top-0 z-10 w-full bg-white">
         <Header />
       </header>
