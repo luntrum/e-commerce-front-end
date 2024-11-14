@@ -7,7 +7,7 @@ function App() {
       <header className="fixed top-0 z-10 w-full bg-white">
         <Header />
       </header>
-      <section className="mt-16">
+      <section className="bottom-0 mt-16">
         <Outlet />
       </section>
     </div>

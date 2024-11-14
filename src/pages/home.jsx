@@ -1,9 +1,9 @@
-import { Button, Card, Carousel, List, Typography } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
-import { useContext } from 'react';
-import { ProductContext } from '../components/context/product.context';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../components/context/auth.context';
+import { Button, Card, Carousel, List, Typography } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { useContext } from "react";
+import { ProductContext } from "../components/context/product.context";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../components/context/auth.context";
 
 function HomePage() {
   const { products } = useContext(ProductContext);
@@ -12,29 +12,30 @@ function HomePage() {
     (acc[product.category] = acc[product.category] || []).push(product);
     return acc;
   }, {});
+  // console.log(categorizedProducts);
 
   return (
-    <div className="m-5 w-full ">
+    <div className="m-5 w-full">
       {Object.entries(categorizedProducts).map(([category, products]) => (
-        <div key={category} id={`${category}`} className="w-full mb-8 ">
+        <div key={category} id={`${category}`} className="mb-8 w-full">
           <Typography.Title level={3}>{category}</Typography.Title>
 
-          <div className="m-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center ">
+          <div className="m-auto grid grid-cols-1 items-center justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (
               <div
                 key={product._id}
-                className=" ml-0 my-2 grid items-center justify-center"
+                className="my-2 ml-0 grid items-center justify-center"
               >
                 <Card
                   title={
                     <Link
-                      className=" flex justify-center m-auto items-center text-nowrap hover:underline"
+                      className="m-auto flex items-center justify-center text-nowrap hover:underline"
                       to={`/products/${product.product_id}`}
                     >
                       {product.name}
                     </Link>
                   }
-                  className=" m-auto  justify-between h-full w-60 md:w-72  "
+                  className="m-auto h-full w-60 justify-between md:w-72"
                 >
                   <p className="m-auto text-wrap text-center">
                     {product.title}
@@ -46,7 +47,7 @@ function HomePage() {
                     onClick={() => handleAddtoCart(product.product_id)}
                     className="w-full"
                   >
-                    <p className="text-sm hidden sm:flex">Add to cart</p>
+                    <p className="hidden text-sm sm:flex">Add to cart</p>
                   </Button>
                 </Card>
               </div>

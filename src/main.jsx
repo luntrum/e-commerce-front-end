@@ -1,20 +1,20 @@
-import { createRoot } from 'react-dom/client';
-import { StrictMode } from 'react';
-import './index.css';
-import App from './App.jsx';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import HomePage from './pages/home.jsx';
-import RegisterPage from './pages/register.jsx';
-import LoginPage from './pages/login.jsx';
-import UserPage from './pages/user.jsx';
-import { AuthWrapper } from './components/context/auth.context.jsx';
-import { ProductWrapper } from './components/context/product.context.jsx';
-import ProductDetailPage from './pages/product.jsx';
-import CartPage from './pages/cart.jsx';
+import { createRoot } from "react-dom/client";
+import { StrictMode } from "react";
+import "./index.css";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./pages/home.jsx";
+import RegisterPage from "./pages/register.jsx";
+import LoginPage from "./pages/login.jsx";
+import UserPage from "./pages/user.jsx";
+import { AuthWrapper } from "./components/context/auth.context.jsx";
+import { ProductWrapper } from "./components/context/product.context.jsx";
+import ProductDetailPage from "./pages/product.jsx";
+import CartPage from "./pages/cart.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
@@ -22,30 +22,34 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/user',
+        path: "/user",
         element: <UserPage />,
       },
       {
-        path: '/products/:id',
+        path: "/products/:id",
         element: <ProductDetailPage />,
       },
       {
-        path: '/shopping-cart',
+        path: "/shopping-cart",
         element: <CartPage />,
+      },
+      {
+        path: "/payment",
+        element: <h1>Payment Page</h1>,
       },
     ],
   },
   {
-    path: '/register',
+    path: "/register",
     element: <RegisterPage />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <LoginPage />,
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ProductWrapper>
       <AuthWrapper>
