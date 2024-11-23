@@ -1,17 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../components/context/product.context";
-import {
-  Button,
-  Card,
-  Checkbox,
-  message,
-  notification,
-  Table,
-  Typography,
-} from "antd";
+import { Button, Checkbox, notification, Typography } from "antd";
 import { AuthContext } from "../components/context/auth.context";
 import { useNavigate } from "react-router-dom";
-import { CloseOutlined, PlusSquareOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, CloseOutlined } from "@ant-design/icons";
 
 const CartPage = () => {
   const { auth, handleUpdateCart } = useContext(AuthContext);
@@ -62,10 +54,15 @@ const CartPage = () => {
   const handlePurchase = () => {
     const purchaseItems = Object.values(selectedItems).map((product) => ({
       productId: product.product_id,
-      quantity: editedQuantity[product.product_id] ?? product.quantity,
     }));
-
-    navigate("/payment", { state: { items: purchaseItems } });
+    if (purchaseItems.length > 0) {
+      navigate("/payment", { state: { items: purchaseItems } });
+    } else {
+      notification.error({
+        message: "Purchase Error",
+        description: "Please chose item you want purchase",
+      });
+    }
   };
 
   //edit quantity
@@ -160,6 +157,16 @@ const CartPage = () => {
   };
   return (
     <div className="m-auto mt-5 flex min-h-screen w-full flex-col bg-white">
+      <header className="sticky top-12 z-10 grid h-10 grid-cols-3 bg-white">
+        <Button
+          icon={<ArrowLeftOutlined />}
+          onClick={() => {
+            navigate("/");
+          }}
+          className="col-span-1 mx-5 my-auto"
+        ></Button>
+        <h1 className="col-span-1 text-center text-3xl">Your Shopping Cart</h1>
+      </header>
       <section className="bottom-20 top-12 m-auto w-3/4 min-w-[400px] flex-grow sm:w-2/5">
         {Object.entries(cartItems).map(([category, products]) => (
           <div
