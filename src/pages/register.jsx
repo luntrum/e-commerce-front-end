@@ -1,7 +1,7 @@
-import React from 'react';
-import { Button, Checkbox, Form, Input, notification } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { createUserApi } from '../util/api';
+import React from "react";
+import { Button, Checkbox, Form, Input, notification } from "antd";
+import { useNavigate } from "react-router-dom";
+import { createUserApi } from "../util/api";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -10,20 +10,20 @@ const RegisterPage = () => {
     const res = await createUserApi(name, username, email, password);
     if (res) {
       notification.success({
-        message: 'Create User',
-        description: 'success',
+        message: "Create User",
+        description: "success",
       });
-      navigate('/login');
+      navigate("/login");
     } else {
       notification.error({
-        message: 'Create User',
-        description: 'ERROR',
+        message: "Create User",
+        description: "ERROR",
       });
     }
   };
 
   return (
-    <div className=" flex m-auto justify-center align-middle w-full max-w-[800px] min-h-screen ">
+    <div className="m-auto flex min-h-screen w-full max-w-[800px] justify-center bg-white align-middle">
       <Form
         name="basic"
         initialValues={{
@@ -32,7 +32,7 @@ const RegisterPage = () => {
         onFinish={onFinish}
         autoComplete="off"
         layout="vertical"
-        className="w-1/2 m-auto "
+        className="m-auto w-1/2"
       >
         <Form.Item
           label="Name"
@@ -40,7 +40,7 @@ const RegisterPage = () => {
           rules={[
             {
               required: true,
-              message: 'Please input your name!',
+              message: "Please input your name!",
             },
           ]}
         >
@@ -53,7 +53,7 @@ const RegisterPage = () => {
           rules={[
             {
               required: true,
-              message: 'Please input your username!',
+              message: "Please input your username!",
             },
           ]}
         >
@@ -65,7 +65,7 @@ const RegisterPage = () => {
           rules={[
             {
               required: true,
-              message: 'Please input your email!',
+              message: "Please input your email!",
             },
           ]}
         >
@@ -78,7 +78,7 @@ const RegisterPage = () => {
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: "Please input your password!",
             },
           ]}
         >

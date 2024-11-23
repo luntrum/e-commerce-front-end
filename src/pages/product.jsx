@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { ProductContext } from '../components/context/product.context';
-import { Button, Card } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
-import { selectProductApi } from '../util/api';
-import { AuthContext } from '../components/context/auth.context';
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ProductContext } from "../components/context/product.context";
+import { Button, Card } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { selectProductApi } from "../util/api";
+import { AuthContext } from "../components/context/auth.context";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -38,23 +38,23 @@ const ProductDetailPage = () => {
   }
 
   return (
-    <div className="mt-5 ">
+    <div className="mt-5 bg-white">
       <Card
         key={product.id}
         title={
           <p
-            className=" text-center text-nowrap hover:underline"
+            className="text-nowrap text-center hover:underline"
             to={`/products/${product.product_id}`}
           >
             {product.name}
           </p>
         }
-        className=" m-auto  justify-between h-full w-60 md:w-72  "
+        className="m-auto h-full w-60 justify-between md:w-72"
       >
         <img
           src={product.image}
           alt={product.title}
-          className="w-48 h-48 m-auto "
+          className="m-auto h-48 w-48"
         />
         <p className="m-auto text-wrap text-center">{product.title}</p>
         <p className="text-center">{product.price} </p>
@@ -64,7 +64,7 @@ const ProductDetailPage = () => {
           onClick={() => handleAddtoCart(product.product_id)}
           className="w-full"
         >
-          <p className="text-sm hidden sm:flex">Add to cart</p>
+          <p className="hidden text-sm sm:flex">Add to cart</p>
         </Button>
       </Card>
     </div>

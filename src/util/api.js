@@ -46,7 +46,7 @@ const updateUserApi = (userId, data) => {
     userId,
     data,
   };
-  return axios.post(URL_API, reqData);
+  return axios.patch(URL_API, reqData);
 };
 
 export {

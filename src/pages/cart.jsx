@@ -1,8 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../components/context/product.context";
-import { Button, Card, Checkbox, notification, Table, Typography } from "antd";
+import {
+  Button,
+  Card,
+  Checkbox,
+  message,
+  notification,
+  Table,
+  Typography,
+} from "antd";
 import { AuthContext } from "../components/context/auth.context";
 import { useNavigate } from "react-router-dom";
+import { CloseOutlined, PlusSquareOutlined } from "@ant-design/icons";
 
 const CartPage = () => {
   const { auth, handleUpdateCart } = useContext(AuthContext);
@@ -73,7 +82,24 @@ const CartPage = () => {
       };
     });
   };
-
+  /// delete button
+  const handleDeleteItem = async (product) => {
+    try {
+      const productName = product.name;
+      const res = await handleUpdateCart({
+        updateReq: "delete_item",
+        item: product.product_id,
+      });
+      if (res) {
+        notification.success({
+          message: `Remove item to cart`,
+          description: `${productName} remove from cart`,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   ///done button
   const handleDone = async () => {
     try {
@@ -133,7 +159,7 @@ const CartPage = () => {
     }).format(amout);
   };
   return (
-    <div className="m-auto mt-5 flex min-h-screen w-full flex-col">
+    <div className="m-auto mt-5 flex min-h-screen w-full flex-col bg-white">
       <section className="bottom-20 top-12 m-auto w-3/4 min-w-[400px] flex-grow sm:w-2/5">
         {Object.entries(cartItems).map(([category, products]) => (
           <div
@@ -150,20 +176,21 @@ const CartPage = () => {
             {products.map((product) => (
               <div
                 key={product.product_id}
-                className="row-span-2 my-4 grid min-h-20 grid-cols-8 border p-4 pr-8"
+                className="row-span-2 my-4 grid min-h-20 grid-cols-12 border p-4 pr-8"
               >
-                <Checkbox
-                  checked={selectedItems[product.product_id] ? true : false}
-                  onChange={(e) =>
-                    handleCheckboxChange(product, e.target.checked)
-                  }
-                  className="left-0 col-span-1 ml-0"
-                ></Checkbox>
-                <div className="col-span-7 grid grid-cols-8">
-                  <div className="m-autoflex col-span-3">
+                <div className="left-0 col-span-1 my-auto ml-0">
+                  <Checkbox
+                    checked={selectedItems[product.product_id] ? true : false}
+                    onChange={(e) =>
+                      handleCheckboxChange(product, e.target.checked)
+                    }
+                  ></Checkbox>
+                </div>
+                <div className="col-span-11 grid grid-cols-9">
+                  <div className="col-span-3 my-auto flex justify-start text-left">
                     {product.name.trim()}
                   </div>
-                  <div className="col-span-3 flex justify-between align-middle">
+                  <div className="col-span-2 flex justify-between align-middle">
                     <Button
                       className="m-auto"
                       onClick={() => handleQuantityChange(product, "-")}
@@ -180,10 +207,17 @@ const CartPage = () => {
                       +
                     </Button>{" "}
                   </div>
-                  <div className="col-span-2 m-auto mx-5 w-full pr-2">
+                  <div className="col-span-3 m-auto mx-5 w-full pr-2 text-sm sm:text-lg">
                     {" "}
                     {formatVND(product.price)}
                     {"  "}
+                  </div>
+                  <div className="col-span-1 m-auto ml-5">
+                    <Button
+                      className="m-auto"
+                      icon={<CloseOutlined />}
+                      onClick={() => handleDeleteItem(product)}
+                    ></Button>
                   </div>
                 </div>
               </div>

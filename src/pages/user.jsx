@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
-import { getUserApi } from '../util/api';
-import { Descriptions } from 'antd';
-import { AuthContext } from '../components/context/auth.context';
+import { useContext, useEffect, useState } from "react";
+import { getUserApi } from "../util/api";
+import { Descriptions } from "antd";
+import { AuthContext } from "../components/context/auth.context";
 
 const UserPage = () => {
   const { auth, setAuth } = useContext(AuthContext);
@@ -21,8 +21,8 @@ const UserPage = () => {
   // }, []);
 
   return (
-    <div className="flex justify-center align-middle p-5">
-      <div className="flex flex-col m-auto items-center w-full max-w-lg">
+    <div className="flex justify-center bg-white p-5 align-middle">
+      <div className="m-auto flex w-full max-w-lg flex-col items-center">
         <Descriptions
           title={<span className="text-3xl font-bold">User Info</span>}
           className="text-center text-xl"
@@ -36,7 +36,7 @@ const UserPage = () => {
               </span>
             }
           >
-            <span className="text-sm sm:text-sm md:text-lg lg:text-2xl  ">
+            <span className="text-sm sm:text-sm md:text-lg lg:text-2xl">
               {auth.user.username}
             </span>
           </Descriptions.Item>
@@ -47,7 +47,7 @@ const UserPage = () => {
               </span>
             }
           >
-            <span className="text-sm sm:text-sm md:text-lg lg:text-2xl ">
+            <span className="text-sm sm:text-sm md:text-lg lg:text-2xl">
               {auth.user.name}
             </span>
           </Descriptions.Item>
@@ -58,7 +58,7 @@ const UserPage = () => {
               </span>
             }
           >
-            <span className="text-sm sm:text-sm md:text-lg lg:text-2xl ">
+            <span className="text-sm sm:text-sm md:text-lg lg:text-2xl">
               {auth.user.email}
             </span>
           </Descriptions.Item>
@@ -69,7 +69,7 @@ const UserPage = () => {
               </span>
             }
           >
-            <span className="text-sm sm:text-sm md:text-lg lg:text-2xl ">
+            <span className="text-sm sm:text-sm md:text-lg lg:text-2xl">
               {auth.user.role}
             </span>
           </Descriptions.Item>

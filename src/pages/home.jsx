@@ -15,7 +15,7 @@ function HomePage() {
   // console.log(categorizedProducts);
 
   return (
-    <div className="m-5 w-full">
+    <div className="m-5 w-full bg-white">
       {Object.entries(categorizedProducts).map(([category, products]) => (
         <div key={category} id={`${category}`} className="mb-8 w-full">
           <Typography.Title level={3}>{category}</Typography.Title>

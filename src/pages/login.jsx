@@ -33,7 +33,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex m-auto justify-center align-middle w-full max-w-[800px] min-h-screen ">
+    <div className=" bg-white flex m-auto justify-center align-middle w-full max-w-[800px] min-h-screen ">
       <Form
         layout="vertical"
         className="m-auto w-1/2 "
