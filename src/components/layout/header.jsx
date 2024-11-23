@@ -93,7 +93,7 @@ const Header = () => {
   };
 
   return (
-    <div className="mt-2 flex h-12 justify-between align-middle">
+    <div className="mt-0 flex h-12 justify-between align-middle">
       <div className="m-auto flex justify-between align-middle">
         <Link to={"/"} className="flex">
           <img
