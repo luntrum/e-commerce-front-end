@@ -40,8 +40,6 @@ const CartPage = () => {
           );
           setCartItems(categorizedProducts);
           setEditedQuantity({});
-
-          console.log("categorized Product: ", categorizedProducts);
         }
       } catch (error) {
         console.error("Error fetching cart items:", error);
@@ -54,6 +52,7 @@ const CartPage = () => {
   const handlePurchase = () => {
     const purchaseItems = Object.values(selectedItems).map((product) => ({
       productId: product.product_id,
+      quantity: editedQuantity[product.product_id] ?? product.quantity,
     }));
     if (purchaseItems.length > 0) {
       navigate("/payment", { state: { items: purchaseItems } });
@@ -155,6 +154,7 @@ const CartPage = () => {
       currency: "VND",
     }).format(amout);
   };
+  console.log(cartItems);
   return (
     <div className="m-auto mt-5 flex min-h-screen w-full flex-col bg-white">
       <header className="sticky top-12 z-10 grid h-10 grid-cols-3 bg-white">
@@ -165,8 +165,16 @@ const CartPage = () => {
           }}
           className="col-span-1 mx-5 my-auto"
         ></Button>
-        <h1 className="col-span-1 text-center text-3xl">Your Shopping Cart</h1>
+        <h1 className="col-span-1 text-nowrap text-center text-xl md:text-2xl lg:text-3xl">
+          Your Shopping Cart
+        </h1>
       </header>
+      <div
+        className={`${Object.keys(cartItems).length === 0 ? "flex" : "hidden"} sticky top-24 mx-auto justify-center align-middle`}
+      >
+        {" "}
+        You didn't chose anything{" "}
+      </div>
       <section className="bottom-20 top-12 m-auto w-3/4 min-w-[400px] flex-grow sm:w-2/5">
         {Object.entries(cartItems).map(([category, products]) => (
           <div
