@@ -1,10 +1,8 @@
-import { createContext , useEffect, useState } from 'react';
-import { getAllProductApi, selectProductApi } from '../../util/api';
-
+import { createContext, useEffect, useState } from "react";
+import { getAllProductApi, selectProductApi } from "../../util/api";
 
 export const ProductContext = createContext({});
 export const ProductWrapper = (props) => {
-
   const [products, setProducts] = useState([]);
   //get data from backend
   useEffect(() => {
@@ -13,9 +11,9 @@ export const ProductWrapper = (props) => {
         const data = await getAllProductApi();
 
         setProducts(data);
-        localStorage.setItem('products', JSON.stringify(data));
+        localStorage.setItem("products", JSON.stringify(data));
       } catch (error) {
-        console.error('Failed to fetch products:', error);
+        console.error("Failed to fetch products:", error);
       }
     };
 
@@ -23,8 +21,8 @@ export const ProductWrapper = (props) => {
   }, []);
   ///check if there is data in localStorages
   useEffect(() => {
-    const productsdata = localStorage.getItem('products');
-  
+    const productsdata = localStorage.getItem("products");
+
     if (productsdata) {
       try {
         const paredData = JSON.parse(productsdata);
@@ -32,23 +30,25 @@ export const ProductWrapper = (props) => {
           setProducts(paredData);
         }
       } catch (error) {
-        console.error('Error parsing Products from localStorages', error);
+        console.error("Error parsing Products from localStorages", error);
       }
     }
-   
   }, []);
   //save data to localStorages
   useEffect(() => {
     if (products) {
-      localStorage.setItem('products', JSON.stringify(products));
+      localStorage.setItem("products", JSON.stringify(products));
     }
   }, [products]);
 
-  
+  const formatVND = (amout) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(amout);
+  };
   return (
-    <ProductContext.Provider
-      value={{ products, setProducts }}
-    >
+    <ProductContext.Provider value={{ products, setProducts, formatVND }}>
       {props.children}
     </ProductContext.Provider>
   );

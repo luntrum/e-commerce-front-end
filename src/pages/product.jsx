@@ -8,7 +8,7 @@ import { AuthContext } from "../components/context/auth.context";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
-  const { products } = useContext(ProductContext);
+  const { products, formatVND } = useContext(ProductContext);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const { auth, handleAddtoCart } = useContext(AuthContext);
@@ -38,7 +38,7 @@ const ProductDetailPage = () => {
   }
 
   return (
-    <div className="mt-5 bg-white">
+    <div className="mt-10 h-full bg-white">
       <Card
         key={product.id}
         title={
@@ -49,23 +49,32 @@ const ProductDetailPage = () => {
             {product.name}
           </p>
         }
-        className="m-auto h-full w-60 justify-between md:w-72"
+        className="m-auto mt-10 h-full w-60 justify-between md:w-3/4"
       >
-        <img
-          src={product.image}
-          alt={product.title}
-          className="m-auto h-48 w-48"
-        />
-        <p className="m-auto text-wrap text-center">{product.title}</p>
-        <p className="text-center">{product.price} </p>
-        <Button
-          type="primary"
-          icon={<ShoppingCartOutlined />}
-          onClick={() => handleAddtoCart(product.product_id)}
-          className="w-full"
-        >
-          <p className="hidden text-sm sm:flex">Add to cart</p>
-        </Button>
+        <div className="grid grid-cols-3 grid-rows-5">
+          <img
+            src={product.image}
+            alt={product.title}
+            className="col-span-2 row-span-4 m-auto mb-4 h-48 w-48 md:h-60 md:w-60"
+          />
+          <div className="col-span-1 row-span-4 flex flex-col">
+            <p className="m-auto ml-0 text-wrap text-left text-xl font-bold">
+              {product.title}
+            </p>
+            <p className="m-auto">{product.description} </p>
+            <p className="m-auto ml-0 text-center text-xl">
+              {formatVND(product.price)}{" "}
+            </p>
+          </div>
+          <Button
+            type="primary"
+            icon={<ShoppingCartOutlined />}
+            onClick={() => handleAddtoCart(product.product_id)}
+            className="col-span-3 row-span-1 w-full"
+          >
+            <p className="hidden text-sm sm:flex">Add to cart</p>
+          </Button>
+        </div>
       </Card>
     </div>
   );
